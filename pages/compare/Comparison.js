@@ -40,7 +40,10 @@ export const TickerSession = ({ type, params, curType }) => {
   const [formValue, setFormValue] = useParams(params)
 
   const handleTickers = list => {
-    const newParams = Object.assign({ ...params }, { tickers: list.join(',') })
+    const newParams = Object.assign(
+      { ...params },
+      { tickers: list.join(','), type }
+    )
     router.push({
       query: newParams
     })
@@ -56,7 +59,7 @@ export const TickerSession = ({ type, params, curType }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    const newParams = Object.assign({ ...params }, formValue)
+    const newParams = Object.assign({ ...params }, { ...formValue, type })
     router.push({
       query: newParams
     })
@@ -72,7 +75,7 @@ export const TickerSession = ({ type, params, curType }) => {
       .filter(x => x !== value)
       .join(',')
 
-    const newParams = Object.assign({ ...params }, { tickers: filtered })
+    const newParams = Object.assign({ ...params }, { tickers: filtered, type })
     router.push({
       query: newParams
     })
